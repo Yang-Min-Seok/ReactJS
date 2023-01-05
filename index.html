@@ -3,20 +3,25 @@
   <body>
     <div id="root"></div>
   </body>
+  
   <!-- How to import React(engine) -->
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <!-- How to import React-dom(put elements into HTML) -->
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <!-- How to make browser read JSX syntax (using babel)-->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
   <script type="text/babel">
     const root = document.getElementById("root");
-    const Title = (
-      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-        Hello I'm a title
-      </h3>
-    );
-    const btn = (
+    function Title() {
+      return (
+        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+          Hello I'm a title
+        </h3>
+      );
+    };
+    // arrow function
+    const Button = () => (
       <button
         style={{ backgroundColor: "tomato" }}
         onClick={() => console.log("I am clicked!")}
@@ -24,9 +29,17 @@
         Click me
       </button>
     );
-    const container = React.createElement("div", null, [Title, btn]);
+    const Container = () => (
+      // the first letter of component should be upper case
+      // lower case -> HTML tages
+      // upper case -> React component
+      <div>
+        <Title /> 
+        <Button />
+      </div>
+    );
 
     // put container into root
-    ReactDOM.render(container, root);
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
