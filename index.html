@@ -14,30 +14,19 @@
   <script type="text/babel">
     
     const root = document.getElementById("root");
-    
-    // cnt
-    let cnt = 0;
-    
-    // countUp() -> counting cnt
-    function countUp() {
-      cnt += 1;
-      // rerender
-      rerender();
-    }
 
-    // *** rerender! -> we should call it again to update our UI ***
-    function rerender() {
-      ReactDOM.render(<Container />, root);
+    function App () {
+      // unpacking
+      const [counter, modifier] = React.useState(0);
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button>Click me</button>
+        </div>
+      )
     }
-
-    const Container = () => (
-      <div>
-        <h3>Total clicks: {cnt}</h3>
-        <button onClick={countUp}>Click me</button>
-      </div>
-    );
 
     // initial render
-    ReactDOM.render(<Container />, root);
+    ReactDOM.render(<App />, root);
   </script>
 </html>
