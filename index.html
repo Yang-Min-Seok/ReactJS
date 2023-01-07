@@ -16,11 +16,11 @@
     const root = document.getElementById("root");
 
     function App () {
-      // unpacking
+      // unpacking (variable(current state), modifier)
       const [counter, setCounter] = React.useState(0);
       const onClick = () => {
-        // modifier rerenders component itself
-        setCounter(counter + 1);
+        // setCounter(counter + 1);
+        setCounter((current) => current + 1);
       }
       return (
         <div>
