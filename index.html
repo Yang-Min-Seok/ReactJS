@@ -12,8 +12,8 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <script type="text/babel">
-    const root = document.getElementById("root");
-    function App () {
+    function MinutesToHours () {
+
       // React.useState(default value)
       const [amount, setAmount] = React.useState(0);
       const [inverted, setInverted] = React.useState(false);
@@ -34,7 +34,6 @@
       
       return (
         <div>
-          <h1>Super Converter</h1>
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
@@ -69,7 +68,38 @@
         </div>
       )
     }
+    
+    function KmToMiles () {
+      return (
+        <h3>KM 2 M</h3>
+      )
+    }
 
+    function App () {
+      // [item, function that modifies data]
+      const [index, setIndex] = React.useState(-1);
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      }
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="xx">Select your units</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">KM & Miles</option>
+          </select>
+          <hr />
+          {index === "xx" ? "Plz select your units" : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+        </div>
+      )
+    };
+
+    // find id="root" from document(HTML)
+    const root = document.getElementById("root");
+    
     // initial render
     ReactDOM.render(<App />, root);
   </script>
