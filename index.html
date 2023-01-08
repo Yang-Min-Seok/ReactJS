@@ -96,7 +96,7 @@
             type="number"
             disabled={inverted}
             onChange={onChange}
-            value={inverted ? amount * 1.6 : amount}
+            value={inverted ? amount * 1.609 : amount}
             >
             </input>
           </div>
@@ -108,7 +108,7 @@
             type="number"
             disabled={!inverted}
             onChange={onChange}
-            value={inverted ? amount : amount * 0.62}
+            value={inverted ? amount : amount / 1.609}
             >
             </input>
           </div>
