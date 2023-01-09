@@ -5,41 +5,38 @@
   </body>
   
   <!-- How to import React(engine) -->
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <!-- How to import React-dom(put elements into HTML) -->
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- How to notice React Js which type props must be (preventing error causing by developer) -->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <!-- How to make browser read JSX syntax (using babel)-->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  
+  <!-- How to use babel (reading JSX syntax properly) -->
   <script type="text/babel">
     
-    function Btn({ text, changeValue }) {
-      console.log(text, 'was rendered')
+    function Btn({ text, fontSize=14}) { // We can set default value (fontSize)
       return (
       <button
-        onClick={changeValue}
-        style={{backgroundColor:"tomato", color:"white", padding:"10px 20px", border:0, borderRadius:10,}}
+        style={{backgroundColor:"tomato", color:"white", padding:"10px 20px", border:0, borderRadius:10, fontSize: fontSize}}
         >
         {text}
       </button>
       )
-    }
+    };
     
-    // This may remember which one has been changed!
-    const MemorizedBtn = React.memo(Btn);
+    // Inspect every property's type
+    // If the property doesn't have proper datatype, it will send you a error msg.
+    Btn.propTypes = {
+      text: PropTypes.string,
+      fontSize: PropTypes.number,
+    };
 
     function App () {
-      const [value, setValue] = React.useState("Save Changes");
-      const changeValue = () => {
-        setValue("Revert Changes");
-      }
-      
-      // There is a need to select which components to be changed
-      // Use React.memo(Btn) to know where the props has been changed! 
       return (
         <div>
-          <MemorizedBtn text={value} changeValue={changeValue}/>
-          <MemorizedBtn text="continue"/>
+          <Btn text="Save Changes" fontSize={18}/>
+          <Btn text="continue"/>
         </div>
       )
     };
