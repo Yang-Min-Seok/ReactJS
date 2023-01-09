@@ -13,19 +13,33 @@
   
   <script type="text/babel">
     
-    function Btn({ banana, big }) {
-      return <button
-      style={{backgroundColor:"tomato", color:"white", padding:"10px 20px", border:0, borderRadius:10, fontSize: big ? 18 : 16}}
-      >
-      {banana}
+    function Btn({ text, changeValue }) {
+      console.log(text, 'was rendered')
+      return (
+      <button
+        onClick={changeValue}
+        style={{backgroundColor:"tomato", color:"white", padding:"10px 20px", border:0, borderRadius:10,}}
+        >
+        {text}
       </button>
+      )
     }
     
+    // This may remember which one has been changed!
+    const MemorizedBtn = React.memo(Btn);
+
     function App () {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => {
+        setValue("Revert Changes");
+      }
+      
+      // There is a need to select which components to be changed
+      // Use React.memo(Btn) to know where the props has been changed! 
       return (
         <div>
-          <Btn banana="Save Changes" big={true}/>
-          <Btn banana="Continue" big={false}/>
+          <MemorizedBtn text={value} changeValue={changeValue}/>
+          <MemorizedBtn text="continue"/>
         </div>
       )
     };
